@@ -9,7 +9,7 @@
   height: 50px; }
 
 #section1 .blur {
-  background-color: #e3f2e933;
+  background-color: #61616161;
   padding: 0.4rem 0 0.5rem;
   height: 100vh; }
   #section1 .blur + div {
@@ -159,47 +159,48 @@ hr.leaf::after {
 .line-height-1 {
   line-height: 1; }
 
-.card-animal img {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  display: block;
-  z-index: 33;
-  border: 2px solid #fff;
-  box-shadow: 1px 1px 4px 3px #00000073;
-  object-fit: cover;
-  padding: 0 !important;
-  animation-name: floating;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  filter: grayscale(1); }
-
-.card-animal img:hover {
-  filter: unset;
-  transform: scale(1.05);
-  border: 5px solid #fffc; }
-
-.card-animal p {
-  display: none; }
-
-.card-animal:hover p {
-  display: block;
-  font-size: 18px;
-  background: #0000005c;
-  color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  width: 80vw;
-  position: fixed;
-  z-index: 10000;
-  overflow: visible;
-  left: 0;
-  right: 0;
-  transform: translate(0%, 300%);
-  margin: auto;
-  text-align: center;
-  bottom: 1px; }
+.card-animal {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .card-animal img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    z-index: 33;
+    border: 2px solid #fff;
+    box-shadow: 1px 1px 4px 3px #00000073;
+    object-fit: cover;
+    padding: 0 !important;
+    animation-name: floating;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    filter: grayscale(1); }
+  .card-animal img:hover {
+    filter: unset;
+    transform: scale(1.05);
+    border: 5px solid #fffc; }
+  .card-animal p {
+    display: none; }
+  .card-animal:hover p {
+    display: block;
+    font-size: 18px;
+    background: #0000005c;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    width: 80vw;
+    position: fixed;
+    z-index: 10000;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    transform: translate(0%, 300%);
+    margin: auto;
+    text-align: center;
+    bottom: 1px; }
 
 #section2 .card-animal:first-child img {
   animation-duration: 17s; }
@@ -347,7 +348,7 @@ hr.leaf::after {
   object-fit: cover; }
 
 #section3 {
-  background-image: url("./../images/slide-4.jpg");
+  background-image: url("./../images/slide-4-grey.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

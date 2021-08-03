@@ -9,7 +9,7 @@
     height: 50px;
   }
   .blur {
-    background-color: #e3f2e933;
+    background-color: #61616161;
     padding: 0.4rem 0 0.5rem;
     height: 100vh;
     & + div {
@@ -186,6 +186,11 @@ hr.leaf::after {
 }
 
 .card-animal {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
   img {
     position: absolute;
     width: 150px;
@@ -402,7 +407,7 @@ hr.leaf::after {
   object-fit: cover;
 }
 #section3 {
-  background-image: url("./../images/slide-4.jpg");
+  background-image: url("./../images/slide-4-grey.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
