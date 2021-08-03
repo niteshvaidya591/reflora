@@ -1150,3 +1150,20 @@ body {
     }
   }
 }
+
+
+.slider__indicators {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background: #00000082;
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
