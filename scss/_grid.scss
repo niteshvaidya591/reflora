@@ -1,0 +1,86 @@
+@import "./mixins";
+@import "./base-style";
+@import "./media-query";
+.fluid-wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    &:before,
+    &:after {
+        display: table;
+        content: " ";
+    }
+    &:after {
+        clear: both;
+    }
+    @include media ("<desktop") {
+        & {
+            padding-right: $fluid-wrapper-mobile-padding-right;
+            padding-left: $fluid-wrapper-mobile-padding-left;
+        }
+    }
+    @include media(">=desktop") {
+        & {
+            padding-right: $fluid-wrapper-desktop-padding-right;
+            padding-left: $fluid-wrapper-desktop-padding-left;
+        }
+    }
+}
+
+.nv-jumbotron {
+    margin-right: $jumbotron-desktop-margin-right;
+    margin-left: $jumbotron-desktop-margin-left;
+    @include media ("<desktop") {
+        & {
+            margin-right: $jumbotron-mobile-margin-right;
+            margin-left: $jumbotron-mobile-margin-left;
+        }
+    }
+}
+
+.nv-row {
+    @include display(flex);
+    @include flex-wrap (wrap);
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.nv-no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    &>.nv-col,
+    &>[class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@include row-col-generator("");
+@include column-generator("");
+@include order-generator("");
+@include offset-generator("");
+@include media(">=mobile") {
+    @include row-col-generator("mobile\\:");
+    @include column-generator("mobile\\:");
+    @include order-generator("mobile\\:");
+    @include offset-generator("mobile\\:");
+}
+
+@include media(">=tablet") {
+    @include row-col-generator("tablet\\:");
+    @include column-generator("tablet\\:");
+    @include order-generator("tablet\\:");
+    @include offset-generator("tablet\\:");
+}
+
+@include media(">=desktop") {
+    @include row-col-generator("desktop\\:");
+    @include column-generator("desktop\\:");
+    @include order-generator("desktop\\:");
+    @include offset-generator("desktop\\:");
+}
+@include media(">=widescreen") {
+    @include row-col-generator("widescreen\\:");
+    @include column-generator("widescreen\\:");
+    @include order-generator("widescreen\\:");
+    @include offset-generator("widescreen\\:");
+}

@@ -1,0 +1,279 @@
+
+// define the root font size for rem unit
+// This variable is set to the html tag element , never define the font size  for body tag it alwasys 1rem.
+//
+$font-size: 16px;
+//
+//define the  font family for the project
+$font-family: "Roboto";
+//
+// define the font family for the callout
+$font-family-callout: "Roboto";
+//
+//body text color
+$body-text-color: #000000;
+// body tag defaults
+@mixin body-defaults {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  background-color: #fff;
+  font-family: $font-family;
+  color: $body-text-color;
+}
+// error borders red color text etc
+$form-invalid-color: ff0109;
+//#ff0109
+// define the grid breakpoints here
+$breakpoints: (
+  "mobile": 320px,
+  "tablet": 640px,
+  "desktop": 1024px,
+  "widescreen": 1200px,
+) !default;
+//
+//h1 to h6 define styling here
+@mixin heading1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+@mixin heading2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+@mixin heading3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+@mixin heading4 {
+  font-size: 1.17rem;
+  font-weight: 700;
+}
+
+@mixin heading5 {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+@mixin heading6 {
+  font-size: 1em;
+}
+
+@mixin paragraph {
+  margin: 0 0 0.625rem;
+}
+
+//  fluid wrapper
+$fluid-wrapper-mobile-padding-right: 15px !important;
+$fluid-wrapper-mobile-padding-left: 15px !important;
+$fluid-wrapper-desktop-padding-right: 50px;
+$fluid-wrapper-desktop-padding-left: 50px;
+//jumbotron
+$jumbotron-desktop-margin-right: -50px !important;
+$jumbotron-desktop-margin-left: -50px !important;
+$jumbotron-mobile-margin-right: -15px !important;
+$jumbotron-mobile-margin-left: -15px !important;
+//anchor
+@mixin anchor-default {
+  color: #00468b;
+  text-decoration: underline;
+  background-color: transparent;
+  &:hover {
+    color: #0043c5;
+    text-decoration: underline;
+  }
+  &:not([href]) {
+    color: inherit;
+    text-decoration: none;
+  }
+  &:not([href]):hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// modal backdrop and sizes
+@mixin nv-modal-sm {
+  max-width: 300px; // min width 320px
+}
+
+@mixin nv-modal-dialog {
+  max-width: 600px; // min width 640px
+}
+
+@mixin nv-modal-lg {
+  max-width: 990px; // min width 1024px
+}
+
+@mixin nv-modal-fluid {
+  max-width: calc(100vw - 20vw); // min width 1200px
+}
+
+// Padding and margin classname
+$box-model: (
+  "pad": "padding",
+  "mar": "margin",
+);
+// Padding and margin values
+$box-model-values-list: (
+  "0": "0 !important",
+  "1": "0.0625rem !important",
+  "2": "0.125rem !important",
+  "3": "0.1875rem !important",
+  "4": "0.25rem !important",
+  "5": "0.3125rem !important",
+  "10": "0.625rem !important",
+  "15": "0.9375rem !important",
+  "20": "1.25rem !important",
+  "25": "1.5625rem !important",
+  "30": "1.875rem !important",
+  "35": "2.1875rem !important",
+  "40": "2.5rem !important",
+  "45": "2.8125rem !important",
+  "50": "3.125rem !important",
+  "55": "3.4375rem !important",
+  "60": "3.75rem !important",
+  "auto": "auto !important",
+);
+// border sizes
+$border-values-list: (
+  "0": "0 !important",
+  "1": "0.0625rem !important",
+  "2": "0.125rem !important",
+  "3": "0.1875rem !important",
+  "4": "0.25rem !important",
+  "5": "0.3125rem !important",
+);
+// background colors
+$background-colors-values-list: (
+  "transparent": "00000000 !important",
+  "primary": "00468b",
+  "white": "ffffff",
+  "aluminum-grey": "949494",
+  "blue-ABCAE9": "ABCAE9",
+  "blue-A0CBED": "A0CBED",
+  "dark-black": "333333",
+  "dark-orange": "ff6131",
+  "light-gray": "f0f0f0",
+  "light-white": "f8f8f8",
+  "light-orange": "f2e9dc",
+  "lighter-pink": "f4e9dc",
+  "grey-F2F2F2": "F2F2F2",
+  "grey-F1F1F1": "F1F1F1",
+  "grey-C1C1C1": "C1C1C1",
+  "grey-C9C9C9": "C9C9C9",
+  "green-DDF6D3": "DDF6D3",
+  "green-DDF6d3": "DDF6D3",
+  "grey-EAEAEA": "EAEAEA",
+  "grey-EDEDEE": "EDEDEE",
+  "grey-E5E5E5": "E5E5E5",
+  "mid-gray": "f2f2f2;",
+  "orange": "eaaa00",
+  "orange-FAA41A": "FAA41A",
+  "red-FFADAD": "FFADAD",
+  );
+  //border colors
+$border-colors-values-list: (
+  "primary": "00468b",
+  "secondary": "6c757d",
+  "success": "28a745",
+  "info": "17a2b8",
+  "warning": "ffc107",
+  "danger": "b30000",
+  "dark-orange": "ff6131",
+  "light": "b1b4b5",
+  "dark": "292929",
+  "white": "ffffff",
+  "blue-ABCAE9": "ABCAE9",
+  "grey-DDDEFE7": "DDDFE7",
+  "blue-109DC0": "109DC0",
+  "fields": "595959",
+);
+//border colors
+$text-colors-values-list: (
+  "primary": "00468b",
+  "secondary": "6c757d",
+  "success": "28a745",
+  "info": "17a2b8",
+  "warning": "ffc107",
+  "danger": "b30000",
+  "dark-orange": "ff6131",
+  "light": "f2f2f2",
+  "dark": "343a40",
+  "white": "ffffff",
+  "black": "292929",
+  "blue": "4298B5",
+);
+// display
+$display-values-list: (
+  "none": "none",
+  "inline": "inline",
+  "inline-block": "inline-block",
+  "block": "block",
+  "table": "table",
+  "table-row": "table-row",
+  "table-cell": "table-cell",
+  "flex": "flex",
+  "inline-flex": "inline-flex",
+);
+
+
+
+
+
+// button styling
+@mixin button_custom_properties{
+  padding: 0.6rem 1.4rem;
+}
+
+@mixin  button_primary {
+  color: #fff !important;
+  background-color: unquote('#' + map-get($background-colors-values-list, "primary"));
+  border: 0.125rem solid unquote('#' + map-get($border-colors-values-list, "primary"));
+  &-hover:hover,&-hover:focus {
+      color: unquote('#' + map-get($text-colors-values-list, "primary")) !important;
+      background-color: unquote('#' + map-get($background-colors-values-list, "white")) !important;
+      border: 0.125rem solid unquote('#' + map-get($border-colors-values-list, "primary"));
+      ;
+  }
+}
+
+@mixin button_secondary{
+  color: #ffffff;
+  background-color: #DA6416;
+  border: 0.125rem solid #DA6416;
+  &-hover:hover,&-hover:focus {
+      color: #ffffff;
+      background-color: #EA7224;
+      border: 0.125rem solid #EA7224;
+  }
+}
+
+@mixin button_primary_inverted {
+  color: unquote('#' + map-get($text-colors-values-list, "primary"));
+  background-color: #ffffff;
+  border: 0.125rem solid unquote('#' + map-get($border-colors-values-list, "primary"));
+  &-hover:hover,&-hover:focus {
+      color: #ffffff;
+      background-color: unquote('#' + map-get($background-colors-values-list, "primary"));
+      border: 0.125rem solid unquote('#' + map-get($border-colors-values-list, "primary"));
+  }
+}
+@mixin button_secondary_inverted{
+  color: #DA6416;
+  background-color: #ffffff;
+  border: 0.125rem solid #DA6416;
+  &-hover:hover, &-hover:focus{
+      color: #ffffff;
+      background-color: #DA6416;
+      border: 0.125rem solid #DA6416;
+  }
+}
+
+
+

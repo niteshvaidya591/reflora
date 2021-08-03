@@ -1,0 +1,702 @@
+@import "./base-style";
+@import "./functions";
+// === Standard layout & styling
+// @mixin font-size($size) {
+//     font-size: $size;
+//     font-size: calculateRem($size);
+//   }
+@mixin box-sizing($value) {
+    -webkit-box-sizing: $value;
+    -moz-box-sizing: $value;
+    box-sizing: $value;
+}
+
+@mixin box-shadow($value) {
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    box-shadow: $value;
+}
+
+@mixin border-radius($value) {
+    -moz-border-radius: $value;
+    -webkit--radius: $value;
+    border-radius: $value;
+}
+
+@mixin background-size($value) {
+    -o-background-size: $value;
+    -webkit-background-size: $value;
+    -moz-background-size: $value;
+    background-size: $value;
+}
+
+@mixin linear-gradient($angle, $gradient1, $gradient2) {
+    background-color: $gradient2;
+    /* Fallback Color */
+    background-image: -webkit-gradient(linear, $angle, from($gradient1), to($gradient2));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient($angle, $gradient1, $gradient2);
+    /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient($angle, $gradient1, $gradient2);
+    /* FF3.6 */
+    background-image: -ms-linear-gradient($angle, $gradient1, $gradient2);
+    /* IE10 */
+    background-image: -o-linear-gradient($angle, $gradient1, $gradient2);
+    /* Opera 11.10+ */
+    background-image: linear-gradient($angle, $gradient1, $gradient2);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=$angle, StartColorStr='#{$gradient1}', EndColorStr='#{$gradient2}');
+}
+
+// === Animations
+@mixin transition($value) {
+    -webkit-transition: $value;
+    transition: $value;
+}
+
+@mixin transform($value) {
+    //   -o-transform: $value;
+    -ms-transform: $value;
+    -webkit-transform: $value;
+    transform: $value;
+}
+
+@mixin transform-origin($value) {
+    -o-transform-origin: $value;
+    -ms-transform-origin: $value;
+    -webkit-transform-origin: $value;
+    transform-origin: $value;
+}
+
+@mixin animation($name, $duration, $timing, $type) {
+    -o-animation: $name $duration $timing $type;
+    -moz-animation: $name $duration $timing $type;
+    -webkit-animation: $name $duration $timing $type;
+    animation: $name $duration $timing $type;
+}
+
+@mixin animation-delay($value) {
+    -o-animation: $value;
+    -moz-animation: $value;
+    -webkit-animation: $value;
+    animation: $value;
+}
+
+@mixin keyframes($value) {
+    @-webkit-keyframes #{$value} {
+        @content;
+    }
+    @-moz-keyframes #{$value} {
+        @content;
+    }
+    @-o-keyframes #{$value} {
+        @content;
+    }
+    @keyframes #{$value} {
+        @content;
+    }
+}
+
+// === Filters
+@mixin filter($value) {
+    -o-filter: $value;
+    -ms-filter: $value;
+    -webkit-filter: $value;
+    -moz-filter: $value;
+    filter: $value;
+}
+
+// === Browser mods
+@mixin appearance($value) {
+    -moz-appearance: $value;
+    -webkit-appearance: $value;
+    appearance: $value;
+}
+
+@mixin user-select($value) {
+    -webkit-touch-callout: $value;
+    -webkit-user-select: $value;
+    -khtml-user-select: $value;
+    -moz-user-select: $value;
+    -ms-user-select: $value;
+    user-select: $value;
+}
+
+// === Display mods
+@mixin display($value) {
+    @if $value=="none" {
+        display: none
+    }
+    @if $value=="inline" {
+        display: inline;
+    }
+    @if $value=="inline-block" {
+        display: inline-block;
+    }
+    @if $value=="block" {
+        display: block;
+    }
+    @if $value=="table" {
+        display: table;
+    }
+    @if $value=="table-row" {
+        display: table-row;
+    }
+    @if $value=="table-cell" {
+        display: table-cell;
+    }
+    @if $value=="flex" {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    @if $value=="inline-flex" {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+    }
+}
+
+@mixin display-generator($break-value) {
+    @each $key,
+    $val in $display-values-list {
+        .#{$break-value}nv-d-#{$key} {
+            @include display(#{$val});
+        }
+    }
+}
+
+@mixin display-print-generator {
+    @each $key,
+    $val in $display-values-list {
+        .nv-d-print-#{$key} {
+            @include display(#{$val});
+        }
+    }
+}
+
+//*-----------------------------------------------------box model start-------------------------------------------------*/
+
+@mixin box-model($break-value) {
+    @each $classname,
+    $property in $box-model {
+        @each $key,
+        $val in $box-model-values-list {
+            @if $key!="auto" or $classname!="pad" {
+                .#{$break-value}#{$classname}-#{$key} {
+                    #{$property}: unquote($val);
+                }
+                .#{$break-value}#{$classname}-t-#{$key},
+                .#{$break-value}#{$classname}-v-#{$key} {
+                    #{$property}-top: unquote($val);
+                }
+                .#{$break-value}#{$classname}-r-#{$key},
+                .#{$break-value}#{$classname}-h-#{$key} {
+                    #{$property}-right: unquote($val);
+                }
+                .#{$break-value}#{$classname}-b-#{$key},
+                .#{$break-value}#{$classname}-v-#{$key} {
+                    #{$property}-bottom: unquote($val);
+                }
+                .#{$break-value}#{$classname}-l-#{$key},
+                .#{$break-value}#{$classname}-h-#{$key} {
+                    #{$property}-left: unquote($val);
+                }
+            }
+            @if $key!="0" and $key!="auto" and $property=="margin" {
+                .#{$break-value}#{$classname}-n#{$key} {
+                    #{$property}: unquote("-" + $val);
+                }
+                .#{$break-value}#{$classname}-t-n#{$key},
+                .#{$break-value}#{$classname}-v-n#{$key} {
+                    #{$property}-top: unquote("-" + $val);
+                }
+                .#{$break-value}#{$classname}-r-n#{$key},
+                .#{$break-value}#{$classname}-h-n#{$key} {
+                    #{$property}-right: unquote("-" + $val);
+                }
+                .#{$break-value}#{$classname}-b-n#{$key},
+                .#{$break-value}#{$classname}-v-n#{$key} {
+                    #{$property}-bottom: unquote("-" + $val);
+                }
+                .#{$break-value}#{$classname}-l-n#{$key},
+                .#{$break-value}#{$classname}-h-n#{$key} {
+                    #{$property}-left: unquote("-" + $val);
+                }
+            }
+        }
+    }
+}
+
+@mixin float-generator($break-value) {
+    .#{$break-value}float {
+        &-left {
+            float: left;
+        }
+        &-right {
+            float: right;
+        }
+        &-right-0 {
+            float: right;
+            right: 0 !important;
+        }
+        &-none {
+            float: none;
+        }
+    }
+}
+
+@mixin text-alignment($break-value) {
+    .#{$break-value}text {
+        &-left {
+            text-align: left;
+        }
+        &-right {
+            text-align: right;
+        }
+        &-center {
+            text-align: center;
+        }
+        &-justify {
+            text-align: justify;
+        }
+    }
+}
+
+@mixin border-generator($break-value) {
+    @each $key,
+    $val in $border-values-list {
+        .#{$break-value}border-#{$key},
+        .#{$break-value}border-top-#{$key} {
+            border-top-width: unquote($val);
+        }
+        .#{$break-value}border-#{$key},
+        .#{$break-value}border-right-#{$key} {
+            border-right-width: unquote($val);
+            ;
+        }
+        .#{$break-value}border-#{$key},
+        .#{$break-value}border-bottom-#{$key} {
+            border-bottom-width: unquote($val);
+            ;
+        }
+        .#{$break-value}border-#{$key},
+        .#{$break-value}border-left-#{$key} {
+            border-left-width: unquote($val);
+            ;
+        }
+    }
+}
+
+@mixin background-colors($break-value) {
+    @each $key,
+    $val in $background-colors-values-list {
+        .#{$break-value}bg-#{$key} {
+            background: unquote('#'+$val);
+        }
+    }
+}
+
+@mixin border-colors($break-value) {
+    @each $key,
+    $val in $border-colors-values-list {
+        .#{$break-value}border-#{$key} {
+            border-color: unquote('#'+$val);
+        }
+    }
+}
+
+@mixin offset-generator($break-value) {
+    $nv-offset-end: 12;
+    @for $i from 0 through $nv-offset-end - 1 {
+        .#{$break-value}nv-offset-#{$i } {
+            margin-left: offset-percentage($i, $nv-offset-end);
+        }
+    }
+}
+
+@mixin column-generator($break-value) {
+    .#{$break-value}nv-col-1,
+    .#{$break-value}nv-col-2,
+    .#{$break-value}nv-col-3,
+    .#{$break-value}nv-col-4,
+    .#{$break-value}nv-col-5,
+    .#{$break-value}nv-col-6,
+    .#{$break-value}nv-col-7,
+    .#{$break-value}nv-col-8,
+    .#{$break-value}nv-col-9,
+    .#{$break-value}nv-col-10,
+    .#{$break-value}nv-col-11,
+    .#{$break-value}nv-col-12,
+    .#{$break-value}nv-col,
+    .#{$break-value}nv-col-auto {
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .#{$break-value}nv-col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+    //
+    $nv-column-end: 12;
+    .#{$break-value}nv-col-auto {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%;
+    }
+    @for $i from 1 through $nv-column-end {
+        .#{$break-value}nv-col-#{$i } {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 column-percentage($i, $nv-column-end);
+            flex: 0 0 column-percentage($i, $nv-column-end);
+            max-width: column-percentage($i, $nv-column-end);
+        }
+    }
+}
+
+@mixin order-generator($break-value) {
+    $nv-order-end: 13;
+    @for $i from -1 through $nv-order-end {
+        @if $i==-1 {
+            .#{$break-value}nv-order-first {
+                -webkit-box-ordinal-group: #{$i + 1 };
+                -ms-flex-order: #{$i };
+                order: #{$i };
+            }
+        }
+        @if $i !=-1 and $i !=$nv-order-end {
+            .#{$break-value}nv-order-#{$i } {
+                -webkit-box-ordinal-group: #{$i + 1 };
+                -ms-flex-order: #{$i };
+                order: #{$i };
+            }
+        }
+        @if $i==$nv-order-end {
+            .#{$break-value}nv-order-last {
+                -webkit-box-ordinal-group: #{$i + 1 };
+                -ms-flex-order: #{$i };
+                order: #{$i };
+            }
+        }
+    }
+}
+
+@mixin row-col-generator($break-value) {
+    @for $i from 1 through 6 {
+        .#{$break-value}nv-row-cols-#{$i }>* {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 percentage(1/$i);
+            flex: 0 0 percentage(1/$i);
+            max-width: percentage(1/$i);
+        }
+    }
+}
+
+// === Flex Layouts
+@mixin flex-direction($value) {
+    @if $value=="row" {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+    @else if $value=="column" {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    @else if $value=="row-reverse" {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+    }
+    @else if $value=="column-reverse" {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+    }
+    @else {
+        @error "Unknown parameter #{$value}.";
+    }
+}
+
+@mixin flex-wrap($value) {
+    @if $value=="wrap" {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    @else if $value=="nowrap" {
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    }
+    @else if $value=="wrap-reverse" {
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+    }
+    @else {
+        @error "Unknown parameter #{$value}.";
+    }
+}
+
+@mixin justify-content($value) {
+    @if $value=="flex-start" {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    @else if $value=="flex-end" {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+    }
+    @else if $value=="center" {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+    @else if $value=="space-between" {
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    @else if $value=="space-around" {
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+    }
+    @else {
+        @error "Unknown parameter #{$value}.";
+    }
+}
+
+@mixin align-items($value) {
+    @if $value=="flex-start" {
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+    @else if $value=="flex-end" {
+        -webkit-box-align: end;
+        -ms-flex-align: end;
+        align-items: flex-end;
+    }
+    @else if $value=="center" {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    @else if $value=="baseline" {
+        -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+    }
+    @else if $value=="stretch" {
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+    }
+    @else {
+        @error "Unknown parameter #{$value}.";
+    }
+}
+
+@mixin align-content($value) {
+    @if $value=="flex-start" {
+        -ms-flex-line-pack: start;
+        align-content: flex-start;
+    }
+    @else if $value=="flex-end" {
+        -ms-flex-line-pack: end;
+        align-content: flex-end;
+    }
+    @else if $value=="center" {
+        -ms-flex-line-pack: center;
+        align-content: center;
+    }
+    @else if $value=="space-between" {
+        -ms-flex-line-pack: justify;
+        align-content: space-between;
+    }
+    @else if $value=="space-around" {
+        -ms-flex-line-pack: distribute;
+        align-content: space-around;
+    }
+    @else if $value=="stretch" {
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+    }
+    @else {
+        @error "Unknown parameter #{$value}.";
+    }
+}
+
+@mixin align-self($value) {
+    @if $value=="auto" {
+        -ms-flex-item-align: auto;
+        -ms-grid-row-align: auto;
+        align-self: auto;
+    }
+    @else if $value=="flex-start" {
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+    }
+    @else if $value=="flex-end" {
+        -ms-flex-item-align: end;
+        align-self: flex-end;
+    }
+    @else if $value=="center" {
+        -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    }
+    @else if $value=="baseline" {
+        -ms-flex-item-align: baseline;
+        align-self: baseline;
+    }
+    @else if $value=="stretch" {
+        -ms-flex-item-align: stretch;
+        -ms-grid-row-align: stretch;
+        align-self: stretch;
+    }
+    @else {
+        @error "Unknown parameter #{$value}.";
+    }
+}
+
+@mixin flexbox($break-value) {
+    /******* flexbox  css starts **********/
+    .#{$break-value}nv-flex {
+        &-row {
+            @include flex-direction(row);
+        }
+        &-column {
+            @include flex-direction(column);
+        }
+        &-row-reverse {
+            @include flex-direction(row-reverse);
+        }
+        &-column-reverse {
+            @include flex-direction(column-reverse);
+        }
+        &-wrap {
+            @include flex-wrap(wrap);
+        }
+        &-nowrap {
+            @include flex-wrap(nowrap);
+        }
+        &-wrap-reverse {
+            @include flex-wrap(wrap-reverse);
+        }
+        &-fill {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+        }
+        &-grow {
+            &-0 {
+                -webkit-box-flex: 0;
+                -ms-flex-positive: 0;
+                flex-grow: 0;
+            }
+            &-1 {
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+            }
+        }
+        &-shrink {
+            &-0 {
+                -ms-flex-negative: 0;
+                flex-shrink: 0;
+            }
+            &-1 {
+                -ms-flex-negative: 1;
+                flex-shrink: 1;
+            }
+        }
+    }
+    .#{$break-value}nv-justify-content {
+        &-start {
+            @include justify-content(flex-start);
+        }
+        &-end {
+            @include justify-content(flex-end);
+        }
+        &-center {
+            @include justify-content(center);
+        }
+        &-between {
+            @include justify-content(space-between);
+        }
+        &-around {
+            @include justify-content(space-around);
+        }
+    }
+    .#{$break-value}nv-align-items {
+        &-start {
+            @include align-items(flex-start);
+        }
+        &-end {
+            @include align-items(flex-end);
+        }
+        &-center {
+            @include align-items(center);
+        }
+        &-baseline {
+            @include align-items(baseline);
+        }
+        &-stretch {
+            @include align-items(stretch);
+        }
+    }
+    .#{$break-value}nv-align-content {
+        &-start {
+            @include align-content(flex-start);
+        }
+        &-end {
+            @include align-content(flex-end);
+        }
+        &-center {
+            @include align-content(center);
+        }
+        &-between {
+            @include align-content(space-between);
+        }
+        &-around {
+            @include align-content(space-around);
+        }
+        &-stretch {
+            @include align-content(stretch);
+        }
+    }
+    .#{$break-value}nv-align-self {
+        &-auto {
+            @include align-self(auto);
+        }
+        &-start {
+            @include align-self(flex-start);
+        }
+        &-end {
+            @include align-self(flex-end);
+        }
+        &-center {
+            @include align-self(center);
+        }
+        &-baseline {
+            @include align-self(baseline);
+        }
+        &-stretch {
+            @include align-self(stretch);
+        }
+    }
+    /******* flexbox  css ends **********/
+}

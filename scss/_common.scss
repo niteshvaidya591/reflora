@@ -1,0 +1,710 @@
+@import "./mixins";
+@import "./base-style";
+@import "./media-query";
+
+/*------------------------------------------common CSS starts--------------------------------------*/
+
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    word-wrap: normal;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    &-focusable:active,
+    &-focusable:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+    }
+}
+
+.external:after {
+    content: "K";
+    display: inline-block;
+    font-family: "HB_Font";
+    font-size: 14px;
+    margin-left: 5px;
+    color: inherit;
+}
+
+a[href^="tel:"] {
+    font-weight: bold;
+    cursor: pointer;
+    color: unquote('#' + map-get($text-colors-values-list, "primary"));
+    text-decoration: underline;
+    pointer-events: auto;
+}
+
+@media (min-width:1024px) {
+    a[href^="tel:"] {
+        font-weight: bold;
+        color: inherit;
+        text-decoration: none;
+        cursor: auto;
+        pointer-events: none;
+    }
+}
+
+.focus-0 {
+    outline: 0 !important;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.bg-img-fixed {
+    background-attachment: fixed;
+}
+
+
+/* z-index starts add only z-index CSS here where its value > 1000 */
+
+header {
+    z-index: 9999 !important;
+}
+
+.nv-modal-backdrop {
+    z-index: 10000 !important;
+}
+
+.nv-modal {
+    z-index: 10005 !important;
+}
+
+.nv-popover {
+    z-index: 9998 !important;
+}
+
+.nv-modal-open .nv-popover {
+    z-index: 10702 !important;
+}
+
+.select2-dropdown {
+    z-index: 10006 !important;
+}
+
+
+
+/***************************** z-index ends************************************ */
+
+
+/* spinner css starts */
+
+.nv-spinner {
+    -webkit-animation: spin 600ms infinite linear;
+    animation: spin 600ms infinite linear;
+    border-bottom: 4px solid rgba(3, 3, 3, 0.25);
+    border-left: 4px solid rgba(3, 3, 3, 0.25);
+    border-right: 4px solid rgba(3, 3, 3, 0.25);
+    border-radius: 100%;
+    border-top: 4px solid rgba(3, 3, 3, 0.75);
+    height: 24px;
+    margin: 0 auto;
+    position: relative;
+    width: 24px;
+}
+
+.nv-spinner.nv-spinner-lg {
+    border-width: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+@include keyframes(spin) {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* spinner css ends */
+
+.nv-modal-close:before,
+.nv-close-button:before {
+    content: '\0031' !important;
+    font-family: 'HB_FONT';
+}
+
+.nv-modal-close.close {
+    transform: rotate(45deg);
+    float: right;
+    right: 0;
+    position: absolute;
+    top: 0;
+    font-weight: bold;
+    font-size: 1.125rem;
+}
+
+.nv-close-button {
+    position: absolute;
+    transform: rotate(45deg);
+    right: 0;
+    top: 0;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border: 0;
+    float: right;
+    background-color: transparent;
+    color: inherit;
+}
+
+.nv-close-button:focus {
+    border: 2px;
+    outline: 0;
+}
+
+// nv-width-$ generator
+$nv-width-end: 12;
+@function width-percentage($percentage) {
+    @return percentage($percentage/$nv-width-end);
+}
+
+@for $i from 1 through $nv-width-end {
+    .nv-width-#{$i } {
+        width: width-percentage($i);
+    }
+}
+
+//z-index classes
+@for $i from -5 through 10 {
+    @if($i >=0) {
+        .z-index-#{$i  } {
+            z-index: #{$i };
+        }
+    }
+    @else {
+        .z-index-n#{$i * -1} {
+            z-index: #{$i };
+        }
+    }
+}
+
+//
+.full {
+    &-width {
+        width: 100%;
+    }
+    &-height {
+        height: 100%;
+    }
+}
+
+.nv-pos {
+    &-absolute {
+        position: absolute;
+    }
+    &-relative {
+        position: relative;
+    }
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.glyphicon-star {
+    font-size: 24px;
+    color: unquote('#' + map-get($text-colors-values-list, "primary"));
+    &::before {
+        content: "\e007" !important;
+    }
+    &.full-star {
+        color: unquote('#' + map-get($text-colors-values-list, "primary"));
+        &::before {
+            content: "\e006" !important;
+        }
+    }
+    &.half-star {
+        position: relative;
+        top: 3px;
+        right: -3px;
+        display: inline-block;
+        overflow: hidden;
+        white-space: pre;
+        &:before {
+            content: "\e006" !important;
+            position: relative;
+            z-index: 2;
+            width: 48%;
+            display: block;
+            overflow: hidden;
+            color: unquote('#' + map-get($text-colors-values-list, "primary"));
+        }
+        &:after {
+            content: "\e007";
+            position: absolute;
+            z-index: 1;
+            color: unquote('#' + map-get($text-colors-values-list, "primary"));
+            top: 0;
+            left: 0;
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
+
+[class*="border"] {
+    border-style: solid !important;
+}
+
+.small-rounded {
+    border-radius: 0.2rem !important;
+}
+
+.large-rounded {
+    border-radius: 0.3rem !important;
+}
+
+.rounded {
+    & {
+        border-radius: 0.25rem !important;
+    }
+    &-top {
+        border-top-left-radius: 0.25rem !important;
+        border-top-right-radius: 0.25rem !important;
+    }
+    &-right {
+        border-top-right-radius: 0.25rem !important;
+        border-bottom-right-radius: 0.25rem !important;
+    }
+    &-bottom {
+        border-bottom-right-radius: 0.25rem !important;
+        border-bottom-left-radius: 0.25rem !important;
+    }
+    &-left {
+        border-top-left-radius: 0.25rem !important;
+        border-bottom-left-radius: 0.25rem !important;
+    }
+    &-circle {
+        border-radius: 50% !important;
+    }
+    &-pill {
+        border-radius: 50rem !important;
+    }
+    &-0 {
+        border-radius: 0 !important;
+    }
+}
+
+
+/******* border css ends **********/
+
+
+/******* overflow  css starts **********/
+
+.overflow {
+    &-auto {
+        overflow: auto;
+    }
+    &-hidden {
+        overflow: hidden;
+    }
+}
+
+
+/******* overflow  css ends **********/
+
+
+/******* shadow  css starts **********/
+
+.shadow {
+    &-large {
+        @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.075));
+    }
+    & {
+        @include box-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.15));
+    }
+    &-small {
+        @include box-shadow(0 1rem 3rem rgba(0, 0, 0, 0.175));
+    }
+    &-none {
+        @include box-shadow(none !important);
+    }
+}
+
+
+/******* shadow  css ends **********/
+
+
+/******* text  css starts **********/
+
+.text {
+    &-small {
+        font-size: 0.875rem;
+    }
+    &-smallest {
+        font-size: 0.75rem;
+    }
+    &-bigger {
+        font-size: 3.125rem;
+    }
+    &-biggest {
+        font-size: 3.75rem;
+    }
+    &-underline {
+        text-decoration: underline;
+    }
+    &-wrap {
+        white-space: normal !important;
+    }
+    &-nowrap {
+        white-space: nowrap !important;
+    }
+    &-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &-hide {
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+    }
+    &-decoration-none,
+    &-decoration-none:hover {
+        text-decoration: none;
+    }
+    &-break {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    &-reset {
+        color: inherit;
+    }
+    &-lowercase {
+        text-transform: lowercase;
+    }
+    &-uppercase {
+        text-transform: uppercase;
+    }
+    &-capitalize {
+        text-transform: capitalize !important;
+    }
+    &-white,
+    &-white:hover {
+        color: #ffffff !important;
+    }
+    &-primary {
+        color: unquote('#' + map-get($text-colors-values-list, "primary")) !important;
+    }
+    &-black,
+    &-black:hover {
+        color: unquote('#' + map-get($text-colors-values-list, "black")) !important;
+    }
+    &-red {
+        color:unquote(  '#' +  $form-invalid-color) !important;
+    }
+    &-dark-orange {
+        color: #ff6131;
+    }
+    &-blue {
+        color: #0043c5 !important;
+    }
+}
+
+.font-weight {
+    &-lighter {
+        font-weight: 100;
+    }
+    &-light {
+        font-weight: 300;
+    }
+    &-normal {
+        font-weight: 400;
+    }
+    &-medium {
+        font-weight: 500;
+    }
+    &-bold {
+        font-weight: 700;
+    }
+    &-bolder {
+        font-weight: bolder;
+    }
+}
+
+.font-italic {
+    font-style: italic;
+}
+
+
+/*********** text css ends **********/
+
+
+/***********  visibility starts **********/
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+/***********  visibility ends **********/
+
+
+/*********** collapse  opacity and fade starts **********/
+
+.opacity {
+    &-90 {
+        opacity: 0.90;
+    }
+    &-75 {
+        opacity: 0.75;
+    }
+    &-50 {
+        opacity: 0.5;
+    }
+    &-25 {
+        opacity: 0.25;
+    }
+}
+
+.fade {
+    @include transition(opacity 0.15s linear);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade {
+        @include transition(none);
+    }
+}
+
+.fade:not(.show) {
+    opacity: 0;
+}
+
+.collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    @include transition(height 0.15s ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .collapsing {
+        @include transition(none);
+    }
+}
+
+// pointer events starts
+.nv-pe {
+    &-none {
+        pointer-events: none !important;
+    }
+    &-auto {
+        pointer-events: auto !important;
+    }
+}
+
+.nv-c-pointer {
+    cursor: pointer;
+}
+
+
+/********* page section starts **************/
+
+.page-section {
+    @include display(flex);
+    @include flex-wrap(nowrap);
+    height: auto;
+    margin-top: 1.875rem;
+    & .page-sidebar {
+        -webkit-box-flex: 1;
+        flex: 1 1 25%;
+    }
+    & .page-content {
+        -webkit-box-flex: 3;
+        flex: 3 1 75%;
+        margin-left: 1.875rem;
+    }
+}
+
+
+/********* page section ends **************/
+
+
+/*-----------------------------min width media queries start------------------------------------*/
+
+
+/***** MAX WIDTH 1023PX *****/
+
+@media (max-width: 1023px) {
+    .page-section {
+        @include flex-direction(column);
+        & .page-sidebar {
+            display: none;
+        }
+        & .page-content {
+            margin-left: 0;
+            flex: 1 1 100%;
+        }
+    }
+}
+
+
+/*-----------------------------max width media queries ends------------------------------------*/
+
+@include display-generator("");
+@include box-model("");
+@include border-generator("");
+@include border-colors("");
+@include background-colors("");
+@include float-generator("");
+@include text-alignment("");
+@include flexbox("");
+//
+//
+@include media(">=mobile") {
+    @include display-generator("mobile\\:");
+    @include box-model("mobile\\:");
+    @include border-generator("mobile\\:");
+    @include float-generator("mobile\\:");
+    @include text-alignment("mobile\\:");
+    @include flexbox("mobile\\:");
+}
+
+@include media(">=tablet") {
+    @include display-generator("tablet\\:");
+    @include box-model("tablet\\:");
+    @include border-generator("tablet\\:");
+    @include float-generator("tablet\\:");
+    @include text-alignment("tablet\\:");
+    @include flexbox("tablet\\:");
+}
+
+@include media(">=desktop") {
+    @include display-generator("desktop\\:");
+    @include box-model("desktop\\:");
+    @include border-generator("desktop\\:");
+    @include float-generator("desktop\\:");
+    @include text-alignment("desktop\\:");
+    @include flexbox("desktop\\:");
+}
+@include media(">=widescreen") {
+    @include display-generator("widescreen\\:");
+    @include box-model("widescreen\\:");
+    @include border-generator("widescreen\\:");
+    @include float-generator("widescreen\\:");
+    @include text-alignment("widescreen\\:");
+    @include flexbox("widescreen\\:");
+}
+
+@include media("print") {
+    @include display-print-generator;
+}
+
+@media(min-width: 320px) {
+    .mobile\:nv-list-1 {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+        -webkit-column-gap: 2.5rem;
+        -moz-column-gap: 2.5rem;
+        column-gap: 2.5rem;
+        -webkit-column-width: 100%;
+        -moz-column-width: 100%;
+        column-width: 100%;
+        column-fill: balance;
+    }
+}
+
+@media(min-width: 640px) {
+    .tablet\:nv-list-2 {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        -webkit-column-gap: 2.5rem;
+        -moz-column-gap: 2.5rem;
+        column-gap: 2.5rem;
+        -webkit-column-width: 50%;
+        -moz-column-width: 50%;
+        column-width: 50%;
+        column-fill: balance;
+    }
+    .tablet\:nv-list-3 {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+        -webkit-column-gap: 2.5rem;
+        -moz-column-gap: 2.5rem;
+        column-gap: 2.5rem;
+        -webkit-column-width: 33.3%;
+        -moz-column-width: 33.3%;
+        column-width: 33.3%;
+        column-fill: balance;
+    }
+}
+
+@media(min-width: 1024px) {
+    .desktop\:nv-list-3 {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+        -webkit-column-gap: 2.5rem;
+        -moz-column-gap: 2.5rem;
+        column-gap: 2.5rem;
+        -webkit-column-width: 33.3%;
+        -moz-column-width: 33.3%;
+        column-width: 33.3%;
+        column-fill: balance;
+    }
+    .desktop\:nv-list-4 {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        -webkit-column-gap: 2.5rem;
+        -moz-column-gap: 2.5rem;
+        column-gap: 2.5rem;
+        -webkit-column-width: 25%;
+        -moz-column-width: 25%;
+        column-width: 25%;
+        column-fill: balance;
+    }
+    .desktop\:nv-list-5 {
+        -webkit-column-count: 5;
+        -moz-column-count: 5;
+        column-count: 5;
+        -webkit-column-gap: 2.5rem;
+        -moz-column-gap: 2.5rem;
+        column-gap: 2.5rem;
+        -webkit-column-width: 20%;
+        -moz-column-width: 20%;
+        column-width: 20%;
+        column-fill: balance;
+    }
+}
