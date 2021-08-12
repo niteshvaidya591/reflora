@@ -1,3 +1,4 @@
+
 #section1 {
   video {
     width: 100vw;
@@ -92,7 +93,7 @@
   }
 }
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif !important;
   cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAA0VJREFUaEPtmFmoTlEUx3/XEA8KGR7ML16UFB54M6YoJUOGBzORTCkpM3mRiESmUEKkJIqEEh6MmZNQpgd5MCRDhv6+dfPdc797995nn5NunVWnvvrW+q/132udtdY+VTRwqWrg8VMQ+N8ZLDJQZCDyBIoSijzAaHNXBkYBg4H5wK9obzkAuAgsALYAJ4BpwIccYoiCdBFYAaw1D88BEToV5TFjYxeBxcCmhM8rlpUzwJeM4wmGcxGYAeyuA1XBn7XnOnAP+BEcQaSBi8Bo4Linj+/AQ+Ax8Ai4A4jYW0/7VGouAr2Bm6mQ/xm9AI4BR4BbkVi1zF0EWgAfIbOt9ZK1ZJVbJuIiICevgQ6ZeCuBfAXmAPuzwPQhcAEYmIWzMozfwEJgayyuD4ENwLKEI3WbppHORWKMDcnUUD4EhgOnEx7UQt8BXVN7Lhl+BvoAT9Li+BBoBbwHGiWcPDUS/dM6NzuV6BBAGQkWHwICVU/vVQH9svX5ccGeaxqMDZg3NSx9CWwEltQRpHr8XWBNhSz58tIBaeYEZ8GXgMrkaj3RHAUOAXuBdr5RJ/TU6TQngsSXgOpf22gXB4mltjsNDYqipLzT5kOQqS8Bga4GVjnQLwLanyYB64GWAdG8AToG6P9VDSGglqnO08Th5D4wwjZTreITAoLqDLwK0A8iIFzV+UQPB5oRU21+DLJs+LRbEdc9w1tCMiDQntZSkzOhkkN1lM02xbVqD7My7FdPdJOBg97RB5ZQNe4eYHqAE63Q84BrZqOhNQsYCTRL4MwFdgRgB5eQsNvbpaV1gCNlQ/cBdamXZtfWXnYdhjIr0fsiPW8JLaFq4JCbWnkw2qG2A9vKiPQAHpjSPmAdoEuQl6QlIHDVt1biNKJtVgviYWBAhf6vbncbuGEl9akuJzEEZKsTm5KGQYDNbGBXHgSE2RjQt6Pl9jsgrlqq+gDQHdD2Wy7jAa0qFSUmA+WA6vUHgE4pGWhZ1Auu9qylTo/I/ARWAt/yJiD85sBMC8R3JdB+tQg4mZJ4qjbq8qVVQ1NXN7m+QDegjRnpBvbMXtDzwLnYj2FZlZCLVG7/FwRyO1pP4CIDngeVm1qRgdyO1hO4yIDnQeWm9geCIIYxrunw5wAAAABJRU5ErkJggg=="),
     auto;
 }
@@ -1171,4 +1172,21 @@ body {
   padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.section-two{
+  #deer{
+    position: absolute;
+    top: 3rem;
+    width: 300px;
+    left: 35%;
+  }
+  #tree1,#tree2{
+    position: absolute;
+    top: 4rem;
+    width: 200px;
+  }
+  #tree2{
+    width: 300px;
+  }
 }
